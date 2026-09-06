@@ -1,0 +1,9 @@
+# Dirakit oleh tools/build.py — ±8 MB, lahir kembali dalam sedetik.
+nusantara-standalone.html
+
+# Catatan kerja: brief aset dan rujukan bentuk, bukan bagian dari halaman.
+incoming/
+
+# Sampah OS
+Thumbs.db
+.DS_Store
