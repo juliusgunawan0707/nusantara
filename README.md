@@ -2,10 +2,12 @@
 
 Four acts along **Sumbu Kebangsaan**, the nationhood axis of Nusantara in East
 Kalimantan, rendered live in WebGL. One page, no build step, no dependencies at
-runtime: every surface in the 3D scene is drawn into a canvas when the page
-loads.
+runtime. Almost every surface in the 3D scene is drawn into a canvas when the
+page loads; the two exceptions are the palace closing the valley and the three
+gallery plates, which are generated images. Nothing on the page is a
+photograph.
 
-**Live:** _(GitHub Pages URL goes here once the repo is published)_
+**Live:** <https://juliusgunawan0707.github.io/nusantara/>
 
 ---
 
@@ -20,7 +22,7 @@ The four acts follow the axis from its southern end back up to the palace:
 
 | Act | Place |
 |---|---|
-| 01 | Sumbu Kebangsaan — the axis and its three plazas |
+| 01 | Sumbu Kebangsaan — the axis, and the three plazas URBAN+ designed on it |
 | 02 | Plaza Bhinneka Tunggal Ika — the Bhinneka Bridge, 0 km Plaza, Diversity Amphitheater |
 | 03 | Taman Kusuma Bangsa — the Soekarno–Hatta statues, Api Abadi, Monumen Bendera |
 | 04 | Plaza Seremoni — the space nearest the palace |
@@ -29,10 +31,14 @@ The four acts follow the axis from its southern end back up to the palace:
 
 - Land area 252,660 ha — Law 21/2023 (revising Law 3/2022)
 - Green cover 75% — statutory floor: 65% protected forest + 10% food estate
-- Sumbu Kebangsaan: built Dec 2022 – Dec 2023, Rp381.7 billion, inaugurated
-  14 August 2024 — [setneg.go.id](https://setneg.go.id/baca/index/presiden_jokowi_resmikan_plaza_seremoni_sumbu_kebangsaan_di_ibu_kota_nusantara)
-- Taman Kusuma Bangsa: 1,915 m², opened 12 August 2024, 17 m bronze garuda
-  wings, 79 m flag monument — [pu.go.id](https://pu.go.id/berita/simbol-penghormatan-bagi-para-pahlawan-bangsa-taman-kusuma-bangsa-di-ikn-diresmikan)
+- Sumbu Kebangsaan **stage one** (Plaza Seremoni): built Dec 2022 – Dec 2023,
+  Rp381.7 billion, contract Rp365.8 billion to PT Brantas Abipraya, inaugurated
+  14 August 2024 — [pu.go.id](https://pu.go.id/berita/kementerian-pupr-targetkan-penataan-sumbu-kebangsaan-ikn-tahap-i-rampung-desember-2023),
+  [setneg.go.id](https://setneg.go.id/baca/index/presiden_jokowi_resmikan_plaza_seremoni_sumbu_kebangsaan_di_ibu_kota_nusantara).
+  That figure covers stage one only — Plaza Bhinneka was a separate Rp680
+  billion running to December 2024.
+- Taman Kusuma Bangsa: 1,915 m², opened 12 August 2024, 17 m garuda wings,
+  79 m flag monument (a MURI record as the country's tallest) — [pu.go.id](https://pu.go.id/berita/simbol-penghormatan-bagi-para-pahlawan-bangsa-taman-kusuma-bangsa-di-ikn-diresmikan)
 - The three plazas were designed by [URBAN+](https://www.urbanplus.co.id/projects/)
   for the Ministry of Public Works
 
