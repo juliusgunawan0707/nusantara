@@ -7,6 +7,11 @@
 <meta name="description" content="Four acts along Sumbu Kebangsaan, the nationhood axis of Nusantara in East Kalimantan — Plaza Bhinneka Tunggal Ika, Taman Kusuma Bangsa and Plaza Seremoni. Rendered live in WebGL.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305070a'/%3E%3Cpath d='M14.9 15.1 11.7 12.8 11.7 24.3 14.9 24.3z' fill='%23dfe7e0'/%3E%3Cpath d='M17.1 15.1 20.3 12.8 20.3 24.3 17.1 24.3z' fill='%23dfe7e0'/%3E%3Cpath d='M14.9 10.3 11.7 7.5 11.7 12.8 14.9 15.1z' fill='%23dfe7e0' fill-opacity='.38'/%3E%3Cpath d='M17.1 10.3 20.3 7.5 20.3 12.8 17.1 15.1z' fill='%23dfe7e0' fill-opacity='.38'/%3E%3Cpath d='M14.9 17.0 12.8 18.8 14.9 20.6' stroke='%23c99b3f' stroke-width='1.4' fill='none'/%3E%3Cpath d='M17.1 17.0 19.2 18.8 17.1 20.6' stroke='%23c99b3f' stroke-width='1.4' fill='none'/%3E%3Crect x='11.2' y='24.3' width='9.6' height='1.6' fill='%23dfe7e0'/%3E%3Crect x='8.6' y='27.0' width='14.8' height='1.7' fill='%23dfe7e0' fill-opacity='.62'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="secret-pathways-assets/fonts.css">
+<script>
+/* theme before first paint: night (default) or day, remembered per browser */
+(function(){ var t = null; try { t = localStorage.getItem('nusa-theme'); } catch (e) {}
+  document.documentElement.setAttribute('data-theme', t === 'day' ? 'day' : 'night'); })();
+</script>
 <style>
 /* ============================================================= tokens */
 :root{
@@ -40,6 +45,36 @@ body.is-locked{ overflow:hidden; height:100vh; }
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* ============================================================= day (proposal)
+   The same page in daylight. Night stays exactly as it was: every rule here
+   is scoped to [data-theme="day"]. Text flips to dark ink with a pale halo,
+   the washes that darkened the frame (vignette, sticky nav, preloader) turn
+   to a pale haze. */
+[data-theme="day"]{
+  --ink:#dfe7e3; --ink-2:#d3ddd8;
+  --bone:#0e1c16; --bone-dim:#2c3c34; --muted:#4d5d55;
+  --line:rgba(14,28,22,.16); --line-soft:rgba(14,28,22,.08);
+}
+[data-theme="day"] #gl{ background:#b8cad3; }
+[data-theme="day"] #vignette{ background:radial-gradient(125% 95% at 50% 42%, transparent 55%, rgba(210,222,228,.35) 100%); }
+[data-theme="day"] #grain{ opacity:.035; }
+[data-theme="day"] #pre{ background:#dfe7e3; }
+[data-theme="day"] .pre-bar{ background:rgba(14,28,22,.14); }
+[data-theme="day"] .nav::before{ background:rgba(232,239,236,.72); }
+[data-theme="day"] .eyebrow,
+[data-theme="day"] .display,
+[data-theme="day"] .body,
+[data-theme="day"] .body-lg{ text-shadow:0 1px 18px rgba(240,246,244,.85); }
+[data-theme="day"] .body{ color:#2e3d36; }
+[data-theme="day"] .body-lg{ color:#22312a; }
+[data-theme="day"] svg [stroke="#dfe7e0"]{ stroke:var(--bone); }
+[data-theme="day"] svg [fill="#dfe7e0"]{ fill:var(--bone); }
+.theme-sw{ width:30px; height:30px; display:inline-grid; place-items:center; color:var(--bone-dim); transition:color .3s; }
+.theme-sw:hover{ color:var(--bone); }
+.theme-sw svg{ width:15px; height:15px; }
+.theme-sw:focus-visible{ outline:1px solid var(--vermilion); outline-offset:3px; }
+[data-theme="night"] .theme-sw .i-sun, [data-theme="day"] .theme-sw .i-moon{ display:none; }
 
 /* ============================================================= layers */
 #gl{
@@ -159,6 +194,12 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .nav-link:hover .alt{ transform:none; }
 .nav-link.on{ color:var(--bone); }
 .nav-link.on::after{ content:''; position:absolute; left:0; bottom:0; width:100%; height:1px; background:var(--vermilion); }
+.nav-tools{ display:flex; align-items:center; gap:14px; margin-left:clamp(18px,2.6vw,42px); flex:0 0 auto; }
+.lang-sw{ display:flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:.2em; color:var(--muted); }
+.lang-sw button{ padding:4px 2px; color:var(--muted); letter-spacing:.2em; transition:color .3s; }
+.lang-sw button[aria-pressed="true"]{ color:var(--bone); }
+.lang-sw button:hover{ color:var(--bone); }
+.lang-sw button:focus-visible{ outline:1px solid var(--vermilion); outline-offset:3px; }
 .nav-burger{ margin-left:clamp(18px,2.6vw,42px); width:26px; height:16px; position:relative; flex:0 0 auto; }
 .nav-burger i{ position:absolute; right:0; height:1.5px; background:var(--bone); transition:width .45s var(--ease-out), transform .45s var(--ease-out); }
 .nav-burger i:nth-child(1){ top:4px; width:26px; }
@@ -942,7 +983,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <div class="pre-jp jp">वनमार्ग</div>
     <div class="pre-bar"><i id="pre-fill"></i></div>
     <div class="pre-meta">
-      <span>Growing a city inside a rainforest</span><b><span id="pre-pct">0</span>%</b>
+      <span data-i18n="pre">Growing a city inside a rainforest</span><b><span id="pre-pct">0</span>%</b>
     </div>
   </div>
 </div>
@@ -962,7 +1003,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <path d="M15.4 33.4h13.2v2.1H15.4z" fill="#dfe7e0" fill-opacity=".9"/>
       <path d="M11.8 36.3h20.4v2.2H11.8z" fill="#dfe7e0" fill-opacity=".62"/>
     </svg>
-    <span class="brand-tx"><b>NUSANTARA</b><i>A RAINFOREST BECOMING A CAPITAL</i></span>
+    <span class="brand-tx"><b>NUSANTARA</b><i data-i18n="brand">A RAINFOREST BECOMING A CAPITAL</i></span>
   </a>
   <nav class="nav-links" id="navlinks">
     <a class="nav-link" href="#gate" data-cursor><span>Sumbu</span><span class="alt jp">द्वार</span></a>
@@ -970,6 +1011,15 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <a class="nav-link" href="#lessons" data-cursor><span>Kusuma</span><span class="alt jp">ज्योति</span></a>
     <a class="nav-link" href="#eternity" data-cursor><span>Seremoni</span><span class="alt jp">संध्या</span></a>
   </nav>
+  <div class="nav-tools">
+    <div class="lang-sw" role="group" aria-label="Language" data-i18n-aria="langAria">
+      <button type="button" data-lang="en" aria-pressed="true" data-cursor>EN</button><span aria-hidden="true">/</span><button type="button" data-lang="id" aria-pressed="false" data-cursor>ID</button>
+    </div>
+    <button type="button" class="theme-sw" id="themeSw" aria-label="Switch between night and day" data-i18n-aria="themeAria" data-cursor>
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
   <button class="nav-burger" aria-label="Menu" data-cursor><i></i><i></i></button>
 </header>
 
@@ -978,13 +1028,13 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <!-- ============================================================ hero -->
 <section class="hero" id="hero" data-cam="0">
   <div class="hero-top">
-    <div class="eyebrow" data-rv="fade"><span class="dot"></span> Act 00 — Sumbu Kebangsaan</div>
+    <div class="eyebrow" data-rv="fade"><span class="dot"></span> <span data-i18n="act0">Act 00 — Sumbu Kebangsaan</span></div>
     <h1 class="display h-hero">
-      <span class="mask-line"><span>A rainforest</span></span>
-      <span class="mask-line"><span>in the middle of</span></span>
-      <span class="mask-line"><span>becoming a capital.</span></span>
+      <span class="mask-line" data-i18n="h1a"><span>A rainforest</span></span>
+      <span class="mask-line" data-i18n="h1b"><span>in the middle of</span></span>
+      <span class="mask-line" data-i18n="h1c"><span>becoming a capital.</span></span>
     </h1>
-    <p class="hero-sub body" data-rv="up">An axis and three plazas in East Kalimantan, walked after dark.
+    <p class="hero-sub body" data-rv="up" data-i18n="heroSub">An axis and three plazas in East Kalimantan, walked after dark.
       The world is drawn in code; the palace on the ridge and the three gallery plates are generated
       images. None of it is a photograph — it is a stylised reading of Nusantara, not a record of it.</p>
   </div>
@@ -992,25 +1042,25 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   <div class="hero-spacer"></div>
 
   <div class="hero-foot">
-    <div class="hero-cue" data-rv="fade"><span>Scroll to enter</span><span class="track"><i></i></span></div>
+    <div class="hero-cue" data-rv="fade"><span data-i18n="cue">Scroll to enter</span><span class="track"><i></i></span></div>
     <div class="chapters" id="chips">
       <div class="chip" data-chip="0" data-rv="up" data-cursor><span class="num">01</span>
-        <span class="tx"><b>Sumbu Kebangsaan</b><p>One axis south from the palace, with three plazas on it.</p></span></div>
+        <span class="tx"><b>Sumbu Kebangsaan</b><p data-i18n="chip0">One axis south from the palace, with three plazas on it.</p></span></div>
       <div class="chip" data-chip="1" data-rv="up" data-cursor><span class="num">02</span>
-        <span class="tx"><b>Plaza Bhinneka</b><p>A bridge, a memorial lane and an amphitheatre for many at once.</p></span></div>
+        <span class="tx"><b>Plaza Bhinneka</b><p data-i18n="chip1">A bridge, a memorial lane and an amphitheatre for many at once.</p></span></div>
       <div class="chip" data-chip="2" data-rv="up" data-cursor><span class="num">03</span>
-        <span class="tx"><b>Kusuma Bangsa</b><p>A flag hill facing the palace, a flame, and 79 metres of flagpole.</p></span></div>
+        <span class="tx"><b>Kusuma Bangsa</b><p data-i18n="chip2">A flag hill facing the palace, a flame, and 79 metres of flagpole.</p></span></div>
       <div class="chip" data-chip="3" data-rv="up" data-cursor><span class="num">04</span>
-        <span class="tx"><b>Plaza Seremoni</b><p>The space nearest the palace, opened 14 August 2024.</p></span></div>
+        <span class="tx"><b>Plaza Seremoni</b><p data-i18n="chip3">The space nearest the palace, opened 14 August 2024.</p></span></div>
     </div>
   </div>
 
-  <a class="peek" href="#pathways" data-view="3" data-rv="fade" data-cursor aria-label="Preview: the marker, before dawn">
+  <a class="peek" href="#pathways" data-view="3" data-rv="fade" data-cursor aria-label="Preview: the marker, before dawn" data-i18n-aria="peekAria">
     <!-- data-frame, or the live view is blitted over the whole anchor and
          runs on down behind the caption instead of stopping at the frame -->
     <span class="peek-fr" data-frame></span>
     <span class="peek-play"><svg viewBox="0 0 22 22" fill="none"><path d="M8 5.6 16.4 11 8 16.4z" fill="#dfe7e0"/></svg></span>
-    <span class="peek-cap"><b class="jp">द्वार</b><i>The marker — before dawn</i></span>
+    <span class="peek-cap"><b class="jp">द्वार</b><i data-i18n="peekCap">The marker — before dawn</i></span>
   </a>
 
   <div class="word-fb" aria-hidden="true">NUSA</div>
@@ -1038,30 +1088,30 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <span class="k"><b>01</b> — Sumbu Kebangsaan</span><span class="rule"></span><span class="k jp">द्वार</span>
   </div>
   <div class="gate-grid">
-    <h2 class="display h-sec" data-rv="up">One axis, three open spaces, and a marker at the far end of it.</h2>
+    <h2 class="display h-sec" data-rv="up" data-i18n="gateH">One axis, three open spaces, and a marker at the far end of it.</h2>
     <div class="gate-copy">
-      <p class="lead" data-rv="up">Everything here is arranged along one line. Sumbu Kebangsaan — the
+      <p class="lead" data-rv="up" data-i18n="gateLead">Everything here is arranged along one line. Sumbu Kebangsaan — the
         nationhood axis — runs south from the presidential palace, and its builders describe it as an open
         space standing for three harmonies at once: between people and God, people and nature, and people
         and each other. A run of open spaces sits along it, reaching south toward the Mangrove Ecopark.</p>
-      <p class="body" data-rv="up">Three of the spaces on it were designed by URBAN+: Plaza Seremoni
+      <p class="body" data-rv="up" data-i18n="gateBody">Three of the spaces on it were designed by URBAN+: Plaza Seremoni
         nearest the palace, then Plaza Sipil, then Plaza Bhinneka Tunggal Ika, which holds Titik Nol — the
         capital's ceremonial ground zero. The axis does not stop there; it carries on south past them.
         Stage one, Plaza Seremoni, was built between December 2022 and December 2023 for Rp381.7 billion.
         What follows walks the axis backwards, from the marker up to the palace.</p>
       <a class="arrowlink" href="#pathways" data-rv="fade" data-cursor>
-        <span>Cross the threshold</span>
+        <span data-i18n="cross">Cross the threshold</span>
         <span class="ar"><svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg></span>
       </a>
     </div>
   </div>
   <div class="gate-stats" data-rv="up">
-    <div><b>252,660<i>ha</i></b><span>Land area</span></div>
-    <div><b>75<i>%</i></b><span>Green, by statute</span></div>
-    <div><b>2022</b><span>First stage</span></div>
-    <div><b>∞</b><span>Rainforest</span></div>
+    <div><b data-i18n="stat0n">252,660<i>ha</i></b><span data-i18n="stat0">Land area</span></div>
+    <div><b>75<i>%</i></b><span data-i18n="stat1">Green, by statute</span></div>
+    <div><b>2022</b><span data-i18n="stat2">First stage</span></div>
+    <div><b>∞</b><span data-i18n="stat3">Rainforest</span></div>
   </div>
-  <p class="stat-src" data-rv="fade">Land area under Law 21/2023 — 252,660 ha on land, 69,769 ha at sea.
+  <p class="stat-src" data-rv="fade" data-i18n="statSrc">Land area under Law 21/2023 — 252,660 ha on land, 69,769 ha at sea.
     The 75% is a statutory floor, not an outcome: 65% protected forest plus 10% food estate. Construction
     runs in five stages from 2022 to a 2045 target.</p>
 </section>
@@ -1093,7 +1143,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
         <i class="glow" style="--gx:80.2%; --gy:23.9%; --gr:22%; --gt:6.1s; --gt2:9.7s; --gc1:rgba(255,142,108,.50); --gc2:rgba(212,56,38,.24)"></i>
         <div class="card-lab"><b>Bhinneka Bridge</b><span class="jp">मार्ग</span></div>
       </div>
-      <div class="card-meta"><span>The crossing</span><span>01 / 03</span></div>
+      <div class="card-meta"><span data-i18n="card0">The crossing</span><span>01 / 03</span></div>
     </article>
     <article class="card" data-rv="up" data-view="1" data-cursor>
       <div class="card-fr" data-frame>
@@ -1101,7 +1151,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
         <i class="glow glow--flame" style="--gx:70.5%; --gy:47.2%; --gr:14%; --gt:3.7s; --gt2:5.3s; --gc1:rgba(255,198,124,.62); --gc2:rgba(226,118,40,.30)"></i>
         <div class="card-lab"><b>Plaza Titik Nol</b><span class="jp">दीप</span></div>
       </div>
-      <div class="card-meta"><span>The marker</span><span>02 / 03</span></div>
+      <div class="card-meta"><span data-i18n="card1">The marker</span><span>02 / 03</span></div>
     </article>
     <article class="card" data-rv="up" data-view="2" data-cursor>
       <div class="card-fr" data-frame>
@@ -1109,7 +1159,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
         <i class="glow" style="--gx:48.0%; --gy:16.8%; --gr:20%; --gt:7.3s; --gt2:11.2s; --gc1:rgba(255,138,104,.52); --gc2:rgba(208,54,36,.24)"></i>
         <div class="card-lab"><b>Diversity Amphitheater</b><span class="jp">दृश्य</span></div>
       </div>
-      <div class="card-meta"><span>Room for many</span><span>03 / 03</span></div>
+      <div class="card-meta"><span data-i18n="card2">Room for many</span><span>03 / 03</span></div>
     </article>
   </div>
 </section>
@@ -1132,8 +1182,8 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <span class="k"><b>03</b> — Taman Kusuma Bangsa</span><span class="rule"></span><span class="k jp">ज्योति</span>
   </div>
   <div class="cur-head">
-    <h2 class="display h-sec" data-rv="up">A flag hill, facing the palace across the valley.</h2>
-    <p class="body-lg" data-rv="up">Taman Kusuma Bangsa was built between January and August 2024 and
+    <h2 class="display h-sec" data-rv="up" data-i18n="lesH">A flag hill, facing the palace across the valley.</h2>
+    <p class="body-lg" data-rv="up" data-i18n="lesBody">Taman Kusuma Bangsa was built between January and August 2024 and
       opened on the 12th of that August — 1,915 m² holding a plaza, a pair of statues, a flame and a
       landscape. It is a small piece of ground doing a large amount of work: four things stand on it, and
       each one fixes a name, a date or a flame to a hillside that had none of them two years earlier.</p>
@@ -1142,32 +1192,32 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <div class="les" data-les="0" data-cursor>
       <span class="k">01</span>
       <h3>Soekarno &amp; Hatta<em class="jp">मौन</em></h3>
-      <p>Two standing figures, unveiled on 12 August 2024, five days before Independence Day.</p>
-      <span class="t">12 Aug</span><i class="bar"></i>
+      <p data-i18n="les0">Two standing figures, unveiled on 12 August 2024, five days before Independence Day.</p>
+      <span class="t" data-i18n="les0t">12 Aug</span><i class="bar"></i>
     </div>
     <div class="les" data-les="1" data-cursor>
       <span class="k">02</span>
       <h3>Api Abadi<em class="jp">ज्योति</em></h3>
-      <p>A flame kept lit on the hill, in the way a promise is kept out loud.</p>
-      <span class="t">Always</span><i class="bar"></i>
+      <p data-i18n="les1">A flame kept lit on the hill, in the way a promise is kept out loud.</p>
+      <span class="t" data-i18n="les1t">Always</span><i class="bar"></i>
     </div>
     <div class="les" data-les="2" data-cursor>
       <span class="k">03</span>
       <h3>Sayap Pelindung Nusantara<em class="jp">क्रिया</em></h3>
-      <p>Garuda wings, seventeen metres of them, standing behind each figure.</p>
+      <p data-i18n="les2">Garuda wings, seventeen metres of them, standing behind each figure.</p>
       <span class="t">17 m</span><i class="bar"></i>
     </div>
     <div class="les" data-les="3" data-cursor>
       <span class="k">04</span>
       <h3>Monumen Bendera<em class="jp">उद्यान</em></h3>
-      <p>Seventy-nine metres — the tallest flagpole in the country, and a MURI record.</p>
+      <p data-i18n="les3">Seventy-nine metres — the tallest flagpole in the country, and a MURI record.</p>
       <span class="t">79 m</span><i class="bar"></i>
     </div>
     <div class="les" data-les="4" data-cursor>
       <span class="k">05</span>
-      <h3>The view across<em class="jp">अरुण</em></h3>
-      <p>The reason the garden faces the way it does: Istana Garuda sits on the ridge opposite.</p>
-      <span class="t">North</span><i class="bar"></i>
+      <h3><span data-i18n="les4h">The view across</span><em class="jp">अरुण</em></h3>
+      <p data-i18n="les4">The reason the garden faces the way it does: Istana Garuda sits on the ridge opposite.</p>
+      <span class="t" data-i18n="les4t">North</span><i class="bar"></i>
     </div>
   </div>
 </section>
@@ -1189,14 +1239,14 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <img src="secret-pathways-assets/foreground/png/ranting-tropis.webp" alt="" width="1536" height="510" loading="lazy" decoding="async">
     </span>
   </div>
-  <div class="eyebrow" data-rv="fade">Act 04 — Plaza Seremoni</div>
+  <div class="eyebrow" data-rv="fade" data-i18n="act4">Act 04 — Plaza Seremoni</div>
   <h2 class="display" data-rv="up">Plaza Seremoni</h2>
-  <p class="body-lg" data-rv="up">The first of the three spaces, and the closest to the palace. An
+  <p class="body-lg" data-rv="up" data-i18n="finBody">The first of the three spaces, and the closest to the palace. An
     amphitheatre, a forest trail, a visitor centre, a gallery for small traders, a shared street for people
     and bicycles — inaugurated on 14 August 2024. Of everything in these four acts, it is the piece that
     was always meant to be walked on rather than looked at.</p>
   <a class="cta" href="#top" data-rv="fade" data-cursor>
-    <i></i><span>Start again</span>
+    <i></i><span data-i18n="again">Start again</span>
     <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
   </a>
 </section>
@@ -1229,34 +1279,34 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
         <path d="M15.4 33.4h13.2v2.1H15.4z" fill="#dfe7e0" fill-opacity=".9"/>
         <path d="M11.8 36.3h20.4v2.2H11.8z" fill="#dfe7e0" fill-opacity=".62"/>
       </svg>
-      <p>Four acts along Sumbu Kebangsaan, Nusantara, East Kalimantan, rendered live in Three.js. The
+      <p data-i18n="footP">Four acts along Sumbu Kebangsaan, Nusantara, East Kalimantan, rendered live in Three.js. The
         three plazas were designed by URBAN+ for the Ministry of Public Works; the figures and dates here
         come from the Ministry and the State Secretariat. The buildings you see are stylised
         reconstructions — they carry the atmosphere of the place, not the authority of it. A personal
         project, and not a statement by any institution.</p>
     </div>
-    <div><h4>Acts</h4><ul>
+    <div><h4 data-i18n="fActs">Acts</h4><ul>
       <li><a href="#gate" data-cursor>Sumbu Kebangsaan</a></li>
       <li><a href="#pathways" data-cursor>Plaza Bhinneka</a></li>
       <li><a href="#lessons" data-cursor>Kusuma Bangsa</a></li>
       <li><a href="#eternity" data-cursor>Plaza Seremoni</a></li>
     </ul></div>
-    <div><h4>On the hill</h4><ul>
+    <div><h4 data-i18n="fHill">On the hill</h4><ul>
       <li><a href="#lessons" data-cursor>Soekarno &amp; Hatta</a></li>
       <li><a href="#lessons" data-cursor>Api Abadi</a></li>
       <li><a href="#lessons" data-cursor>Sayap Pelindung Nusantara</a></li>
       <li><a href="#lessons" data-cursor>Monumen Bendera</a></li>
     </ul></div>
-    <div><h4>Elsewhere</h4><ul>
-      <li><a href="https://github.com/juliusgunawan0707/nusantara" data-cursor>Source</a></li>
-      <li><a href="https://www.urbanplus.co.id/projects/" data-cursor>URBAN+ plazas</a></li>
+    <div><h4 data-i18n="fElse">Elsewhere</h4><ul>
+      <li><a href="https://github.com/juliusgunawan0707/nusantara" data-cursor data-i18n="fSource">Source</a></li>
+      <li><a href="https://www.urbanplus.co.id/projects/" data-cursor data-i18n="fUrban">URBAN+ plazas</a></li>
       <li><a href="https://threeui.com" data-cursor>ThreeUI · Kage</a></li>
     </ul></div>
   </div>
   <div class="foot-base">
     <span>© 2026 Julius Gunawan</span>
     <span class="jp">मौन</span>
-    <span>WebGL · Onest · East Kalimantan</span>
+    <span data-i18n="fBase">WebGL · Onest · East Kalimantan</span>
   </div>
 </footer>
 
@@ -1269,6 +1319,141 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 
 <div class="rail" id="rail"></div>
 
+<script>
+/* =====================================================================
+   Language: English (default) / Bahasa Indonesia.
+   English lives in the HTML itself; the Indonesian strings below replace
+   it. Facts, figures and dates are the same as the English (see the memory
+   notes on sources) - only the language and the number format change.
+   Proper names (Sumbu Kebangsaan, Api Abadi, the URBAN+ zone names) and the
+   Devanagari words stay as they are.
+   Runs BEFORE the scene script, so a returning Indonesian reader gets the
+   headings translated before they are split into word masks.
+   ===================================================================== */
+(function () {
+  'use strict';
+  var ID = {
+    pre: 'Menumbuhkan kota di dalam hutan hujan',
+    brand: 'HUTAN HUJAN YANG MENJADI IBU KOTA',
+    act0: 'Babak 00 — Sumbu Kebangsaan',
+    h1a: 'Hutan hujan', h1b: 'yang sedang', h1c: 'menjadi ibu kota.',
+    heroSub: 'Sebuah sumbu dan tiga plaza di Kalimantan Timur, dijelajahi selepas gelap. Dunianya digambar dengan kode; istana di punggung bukit dan tiga pelat galeri adalah gambar hasil generasi. Tidak satu pun berupa foto — ini tafsir bergaya atas Nusantara, bukan rekamannya.',
+    cue: 'Gulir untuk masuk',
+    chip0: 'Satu sumbu ke selatan dari istana, dengan tiga plaza di atasnya.',
+    chip1: 'Sebuah jembatan, lorong kenangan, dan amfiteater untuk banyak orang sekaligus.',
+    chip2: 'Bukit bendera yang menghadap istana, sebuah api, dan tiang bendera setinggi 79 meter.',
+    chip3: 'Ruang yang paling dekat dengan istana, diresmikan 14 Agustus 2024.',
+    peekAria: 'Pratinjau: tugu, menjelang fajar',
+    peekCap: 'Tugu — menjelang fajar',
+    gateH: 'Satu sumbu, tiga ruang terbuka, dan sebuah tugu di ujung jauhnya.',
+    gateLead: 'Semua yang ada di sini tersusun di sepanjang satu garis. Sumbu Kebangsaan membentang ke selatan dari istana kepresidenan, dan para pembangunnya menggambarkannya sebagai ruang terbuka yang sekaligus melambangkan tiga keharmonisan: antara manusia dan Tuhan, manusia dan alam, serta manusia dan sesamanya. Serangkaian ruang terbuka berjajar di atasnya, menjangkau ke selatan hingga Mangrove Ecopark.',
+    gateBody: 'Tiga ruang di atasnya dirancang oleh URBAN+: Plaza Seremoni yang terdekat dengan istana, lalu Plaza Sipil, lalu Plaza Bhinneka Tunggal Ika yang memuat Titik Nol — titik nol seremonial ibu kota. Sumbunya tidak berhenti di situ; ia terus berlanjut ke selatan melewati ketiganya. Tahap pertama, Plaza Seremoni, dibangun antara Desember 2022 dan Desember 2023 dengan biaya Rp381,7 miliar. Halaman ini menyusuri sumbu itu dari arah sebaliknya, dari tugu naik ke istana.',
+    cross: 'Lewati ambang',
+    stat0n: '252.660<i>ha</i>', stat0: 'Luas daratan', stat1: 'Hijau, menurut undang-undang', stat2: 'Tahap pertama', stat3: 'Hutan hujan',
+    statSrc: 'Luas daratan menurut UU 21/2023 — 252.660 ha di darat, 69.769 ha di laut. Angka 75% adalah batas bawah yang diwajibkan undang-undang, bukan capaian: 65% kawasan lindung ditambah 10% ketahanan pangan. Pembangunan berjalan dalam lima tahap, dari 2022 menuju target 2045.',
+    card0: 'Penyeberangan', card1: 'Tugu', card2: 'Ruang bagi banyak orang',
+    lesH: 'Bukit bendera, menghadap istana di seberang lembah.',
+    lesBody: 'Taman Kusuma Bangsa dibangun antara Januari dan Agustus 2024 dan diresmikan pada 12 Agustus tahun itu — 1.915 m² yang memuat plaza, sepasang patung, sebuah api, dan lanskap. Sepetak tanah kecil yang memikul kerja besar: empat hal berdiri di atasnya, dan masing-masing menancapkan sebuah nama, tanggal, atau api pada lereng bukit yang dua tahun sebelumnya belum memiliki satu pun.',
+    les0: 'Dua sosok berdiri, diresmikan pada 12 Agustus 2024, lima hari sebelum Hari Kemerdekaan.', les0t: '12 Agu',
+    les1: 'Api yang dijaga tetap menyala di bukit, seperti janji yang diucapkan lantang.', les1t: 'Selalu',
+    les2: 'Sayap garuda setinggi tujuh belas meter, berdiri di belakang setiap sosok.',
+    les3: 'Tujuh puluh sembilan meter — tiang bendera tertinggi di negeri ini, dan rekor MURI.',
+    les4h: 'Pandangan ke seberang',
+    les4: 'Alasan taman ini menghadap ke arah itu: Istana Garuda berdiri di punggung bukit di seberangnya.', les4t: 'Utara',
+    act4: 'Babak 04 — Plaza Seremoni',
+    finBody: 'Ruang pertama dari ketiganya, dan yang paling dekat dengan istana. Sebuah amfiteater, jalur hutan, pusat pengunjung, galeri bagi pedagang kecil, jalan bersama untuk pejalan kaki dan pesepeda — diresmikan pada 14 Agustus 2024. Dari semua yang ada di empat babak ini, inilah bagian yang sejak awal dimaksudkan untuk dijejaki, bukan sekadar dipandang.',
+    again: 'Mulai lagi',
+    footP: 'Empat babak di sepanjang Sumbu Kebangsaan, Nusantara, Kalimantan Timur, dirender langsung dengan Three.js. Ketiga plaza dirancang oleh URBAN+ untuk Kementerian Pekerjaan Umum; angka dan tanggal di sini bersumber dari Kementerian tersebut dan Kementerian Sekretariat Negara. Bangunan yang Anda lihat adalah rekonstruksi bergaya — membawa suasana tempatnya, bukan otoritasnya. Proyek pribadi, dan bukan pernyataan lembaga mana pun.',
+    fActs: 'Babak', fHill: 'Di bukit', fElse: 'Tautan lain', fSource: 'Kode sumber', fUrban: 'Plaza URBAN+',
+    fBase: 'WebGL · Onest · Kalimantan Timur',
+    langAria: 'Bahasa', themeAria: 'Ganti malam dan siang',
+    title: 'Nusantara — hutan hujan yang menjadi ibu kota',
+    desc: 'Empat babak di sepanjang Sumbu Kebangsaan, sumbu kebangsaan Nusantara di Kalimantan Timur — Plaza Bhinneka Tunggal Ika, Taman Kusuma Bangsa, dan Plaza Seremoni.'
+  };
+  var RAIL = {
+    en: ['Sumbu Kebangsaan', 'The marker', 'Bhinneka', 'Kusuma Bangsa', 'Seremoni', 'Colophon'],
+    id: ['Sumbu Kebangsaan', 'Tugu', 'Bhinneka', 'Kusuma Bangsa', 'Seremoni', 'Kolofon']
+  };
+
+  var EN = {};   // captured from the HTML the first time an element is touched
+  var lang = 'en';
+  try { lang = localStorage.getItem('nusa-lang') === 'id' ? 'id' : 'en'; } catch (e) {}
+
+  function nodes(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+
+  // A display line the scene script has already split into word masks is
+  // rebuilt in the same markup, so the reveal state (.rv-in) keeps working.
+  function setSplit(el, text) {
+    el.setAttribute('aria-label', text);
+    el.textContent = '';
+    text.split(' ').forEach(function (word, i) {
+      if (i) el.appendChild(document.createTextNode(' '));
+      var mask = document.createElement('span'), inner = document.createElement('span');
+      mask.className = 'word-mask'; mask.setAttribute('aria-hidden', 'true');
+      inner.className = 'word'; inner.textContent = word;
+      inner.style.setProperty('--word-delay', (i * 72) + 'ms');
+      mask.appendChild(inner); el.appendChild(mask);
+    });
+  }
+
+  function apply() {
+    document.documentElement.lang = lang;
+    nodes('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
+      var split = el.dataset.wordReady === 'true';
+      if (!(k in EN)) EN[k] = split ? el.getAttribute('aria-label') : el.innerHTML;
+      var val = lang === 'id' && ID[k] != null ? ID[k] : EN[k];
+      if (split) { setSplit(el, val.replace(/<[^>]+>/g, '')); return; }
+      if (el.classList.contains('mask-line')) { el.innerHTML = '<span>' + val.replace(/^<span>|<\/span>$/g, '') + '</span>'; return; }
+      el.innerHTML = val;
+    });
+    nodes('[data-i18n-aria]').forEach(function (el) {
+      var k = 'aria:' + el.getAttribute('data-i18n-aria');
+      if (!(k in EN)) EN[k] = el.getAttribute('aria-label');
+      el.setAttribute('aria-label', lang === 'id' ? ID[el.getAttribute('data-i18n-aria')] : EN[k]);
+    });
+    if (!('title' in EN)) {
+      EN.title = document.title;
+      var md = document.querySelector('meta[name="description"]');
+      EN.desc = md ? md.getAttribute('content') : '';
+    }
+    document.title = lang === 'id' ? ID.title : EN.title;
+    var m = document.querySelector('meta[name="description"]');
+    if (m) m.setAttribute('content', lang === 'id' ? ID.desc : EN.desc);
+    nodes('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+    nodes('#rail button').forEach(function (b, i) {
+      var n = RAIL[lang][i]; if (!n) return;
+      b.title = n; b.setAttribute('aria-label', n);
+    });
+  }
+
+  // mask-line EN is captured as "<span>text</span>"; normalise before first use
+  nodes('.mask-line[data-i18n]').forEach(function (el) {
+    var inner = el.querySelector('span');
+    EN[el.getAttribute('data-i18n')] = inner ? inner.innerHTML : el.textContent;
+  });
+
+  nodes('[data-lang]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var next = b.getAttribute('data-lang');
+      if (next === lang) return;
+      lang = next;
+      try { localStorage.setItem('nusa-lang', lang); } catch (e) {}
+      apply();
+    });
+  });
+
+  var sw = document.getElementById('themeSw');
+  if (sw) sw.addEventListener('click', function () {
+    var next = document.documentElement.getAttribute('data-theme') === 'day' ? 'night' : 'day';
+    if (window.NUSA_THEME) window.NUSA_THEME.set(next);
+    else { document.documentElement.setAttribute('data-theme', next); try { localStorage.setItem('nusa-theme', next); } catch (e) {} }
+  });
+
+  window.NUSA_I18N = { rail: function () { return RAIL[lang].slice(); }, lang: function () { return lang; } };
+  if (lang === 'id') apply();
+})();
+</script>
 <script src="secret-pathways-assets/three.min.js"></script>
 <script>
 /* =====================================================================
@@ -1754,6 +1939,24 @@ function texSky() {
     x.fillStyle = 'rgba(214,232,240,' + (.12 + rnd() * .42) * (1 - sy / H) + ')';
     x.beginPath(); x.arc(sx, sy, r, 0, TAU); x.fill();
   }
+  return c;
+}
+
+/* Daylight sky: the same canvas size and horizon glow position as the night
+   one, so the ridge and the fog meet it at the same line. No stars. */
+function texSkyDay() {
+  const W = 512, H = 512, c = cvs(W, H), x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, 'rgb(92,142,194)');   g.addColorStop(.40, 'rgb(140,180,212)');
+  g.addColorStop(.72, 'rgb(186,207,220)'); g.addColorStop(.90, 'rgb(208,220,226)');
+  g.addColorStop(1, 'rgb(200,212,216)');
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  x.globalAlpha = .42; x.globalCompositeOperation = 'screen';
+  x.drawImage(fbmCanvas(W, H, 313, 5, 3, .9), 0, 0);
+  x.globalAlpha = 1; x.globalCompositeOperation = 'source-over';
+  const wg = x.createRadialGradient(W * .68, H * .95, 4, W * .68, H * .95, W * .44);
+  wg.addColorStop(0, 'rgba(255,236,206,.30)'); wg.addColorStop(1, 'rgba(255,255,255,0)');
+  x.fillStyle = wg; x.fillRect(0, 0, W, H);
   return c;
 }
 
@@ -2457,6 +2660,7 @@ function buildIstana() {
   const mat = new THREE.MeshBasicMaterial({
     color: 0xc6d1d6, transparent: true, alphaTest: .015, fog: true
   });
+  WORLD.istanaMat = mat;
   const face = new THREE.Mesh(new THREE.PlaneGeometry(ISTANA.w, ISTANA.w / ratio(img)), mat);
   const seat = () => {
     const h = ISTANA.w / ratio(img);
@@ -4107,7 +4311,8 @@ function buildCardCloth() {
 }
 
 function buildLights() {
-  scene.add(new THREE.HemisphereLight(0x53838f, 0x060a08, .13));
+  const hemi = new THREE.HemisphereLight(0x53838f, 0x060a08, .13);
+  scene.add(hemi); WORLD.hemi = hemi;
 
   const key = new THREE.DirectionalLight(0xb6dbe4, 1.22);
   key.position.set(2.6, 21, 2.5);
@@ -4127,16 +4332,17 @@ function buildLights() {
   const moonKey = new THREE.DirectionalLight(0xff6a42, .52);
   moonKey.position.set(26, 30, -60);
   moonKey.target.position.set(0, 8, -40); scene.add(moonKey.target);
-  scene.add(moonKey);
+  scene.add(moonKey); WORLD.rim = moonKey;
 
   /* The hall's own lamps. They light the podium and the top of the flight and
      nothing else — a range that reaches the roof turns the whole building into
      a paper lantern and the silhouette disappears. */
   const hallL = new THREE.PointLight(0xff8a26, 2.3, 15, 2);
   hallL.position.set(0, PODIUM + 1.2, TEMPLE_Z + 8.6); scene.add(hallL); WORLD.hallLight = hallL;
+  WORLD.hallWings = [];
   [-1, 1].forEach(s => {
     const w = new THREE.PointLight(0xff8420, 2.2, 11, 2);
-    w.position.set(s * 11.4, PODIUM + 1.2, TEMPLE_Z + 5.6); scene.add(w);
+    w.position.set(s * 11.4, PODIUM + 1.2, TEMPLE_Z + 5.6); scene.add(w); WORLD.hallWings.push(w);
   });
 
   /* the moon throws almost nothing, but a trace of red high on the right
@@ -4145,13 +4351,75 @@ function buildLights() {
   moonL.position.set(11.0, 17.0, -24.0); scene.add(moonL); WORLD.moonLight = moonL;
 
   const fill = new THREE.PointLight(0x86c6d2, 0.95, 30, 2);
-  fill.position.set(-1, 13.5, -16.0); scene.add(fill);
+  fill.position.set(-1, 13.5, -16.0); scene.add(fill); WORLD.fill = fill;
 
   /* the flight is the spine of the composition — without a lamp of its own it
      falls into the same black as the ground and the eye has nothing to climb */
   const stairL = new THREE.PointLight(0xffa049, 4.2, 17, 2);
-  stairL.position.set(0, 7.6, -26.0); scene.add(stairL);
+  stairL.position.set(0, 7.6, -26.0); scene.add(stairL); WORLD.stair = stairL;
 }
+/* ====================================================== 5b · night / day
+   One table holds every value that differs between the two. Night is the
+   page as it was art-directed; day is a first pass for review. Per-frame
+   animation multiplies by TH.lamp / TH.moon, so a lamp switched off in the
+   table stays off instead of being re-lit by the next frame. */
+const THEME = {
+  night: {
+    clear: 0x05070a, fog: 0x050a0e, fogD: .0168, bg: 0x060a0d, sky: 'night', skyCol: [.60, .70, .80],
+    hemi: [0x53838f, 0x060a08, .13], key: [0xb6dbe4, 1.22], rim: [0xff6a42, .52],
+    fill: [0x86c6d2, .95], stair: 4.2, wings: 2.2, moonL: 3.0, lamp: 1, moon: 1,
+    istana: 0xc6d1d6, embers: true, post: { exp: .62, bloom: .34, vig: 1, sat: 1.05 }
+  },
+  day: {
+    clear: 0xc4d6de, fog: 0xbfd0d6, fogD: .0098, bg: 0xc4d6de, sky: 'day', skyCol: [1.55, 1.55, 1.6],
+    hemi: [0xe2f1f8, 0x55623f, 1.6], key: [0xfff0d8, 3.6], rim: [0xffe0b8, .7],
+    fill: [0xd7ebf3, .7], stair: 0, wings: 0, moonL: 0, lamp: 0, moon: 0,
+    istana: 0xffffff, embers: false, post: { exp: 1.18, bloom: .10, vig: .25, sat: 1.04 }
+  }
+};
+const TH = { lamp: 1, moon: 1 };
+const SKY_TEX = {};
+function applyTheme(name) {
+  const t = THEME[name] || THEME.night;
+  TH.lamp = t.lamp; TH.moon = t.moon;
+  if (!renderer) return;
+  renderer.setClearColor(t.clear, 1);
+  scene.fog.color.setHex(t.fog); scene.fog.density = t.fogD;
+  scene.background.setHex(t.bg);
+  if (WORLD.sky) {
+    SKY_TEX[t.sky] = SKY_TEX[t.sky] || (t.sky === 'day' ? tx(texSkyDay()) : WORLD.sky.material.map);
+    if (!SKY_TEX.night) SKY_TEX.night = WORLD.sky.material.map;
+    WORLD.sky.material.map = SKY_TEX[t.sky];
+    WORLD.sky.material.color.setRGB(t.skyCol[0], t.skyCol[1], t.skyCol[2]);
+    WORLD.sky.material.needsUpdate = true;
+  }
+  if (WORLD.hemi) { WORLD.hemi.color.setHex(t.hemi[0]); WORLD.hemi.groundColor.setHex(t.hemi[1]); WORLD.hemi.intensity = t.hemi[2]; }
+  if (WORLD.key) { WORLD.key.color.setHex(t.key[0]); WORLD.key.intensity = t.key[1]; }
+  if (WORLD.rim) { WORLD.rim.color.setHex(t.rim[0]); WORLD.rim.intensity = t.rim[1]; }
+  if (WORLD.fill) { WORLD.fill.color.setHex(t.fill[0]); WORLD.fill.intensity = t.fill[1]; }
+  if (WORLD.stair) WORLD.stair.intensity = t.stair;
+  if (WORLD.hallWings) WORLD.hallWings.forEach(w => { w.intensity = t.wings; });
+  if (WORLD.moonLight) WORLD.moonLight.intensity = t.moonL;
+  [WORLD.moon, WORLD.moonHalo].forEach(o => { if (o) o.visible = t.moon > 0; });
+  if (WORLD.moonVeil) WORLD.moonVeil.forEach(v => { v.visible = t.moon > 0; });
+  if (WORLD.lanternGlows) WORLD.lanternGlows.forEach(g => { g.visible = t.lamp > 0; });
+  if (WORLD.embers) WORLD.embers.visible = t.embers;
+  if (WORLD.istanaMat) WORLD.istanaMat.color.setHex(t.istana);
+  if (POST.comp) {
+    const u = POST.comp.uniforms;
+    u.uExp.value = t.post.exp; u.uBloom.value = t.post.bloom; u.uVig.value = t.post.vig; u.uSat.value = t.post.sat;
+  }
+}
+const themeName = () => document.documentElement.getAttribute('data-theme') === 'day' ? 'day' : 'night';
+window.NUSA_THEME = {
+  set(name) {
+    document.documentElement.setAttribute('data-theme', name);
+    try { localStorage.setItem('nusa-theme', name); } catch (e) {}
+    applyTheme(name);
+  },
+  get: themeName
+};
+
 /* ====================================================== 6 · planar mirror */
 /* ================================================== 7 · post-processing */
 const POST = { levels: [] };
@@ -4561,7 +4829,8 @@ function wireHeroExit() {
 function wireNav() {
   let last = 0;
   const rail = $('#rail');
-  const names = ['Sumbu Kebangsaan', 'The marker', 'Bhinneka', 'Kusuma Bangsa', 'Seremoni', 'Colophon'];
+  const names = (window.NUSA_I18N && window.NUSA_I18N.rail()) ||
+    ['Sumbu Kebangsaan', 'The marker', 'Bhinneka', 'Kusuma Bangsa', 'Seremoni', 'Colophon'];
   SECS.forEach((s, i) => {
     const b = document.createElement('button');
     b.innerHTML = '<i></i>'; b.title = names[i] || '';
@@ -4833,15 +5102,15 @@ function updateWorld(dt) {
   RIG.focusAmt = damp(RIG.focusAmt, RIG.focus >= 0 ? 1 : 0, 5, dt);
   const pulse = Math.sin(clock * 1.9) * .5 + .5;
   const f = RIG.focusAmt;
-  if (WORLD.hallHalo) WORLD.hallHalo.material.opacity = .30 + f * .14 + Math.sin(clock * .6) * .035;
-  if (WORLD.hallLight) WORLD.hallLight.intensity = 3.4 * (1 + f * .30) * (1 + Math.sin(clock * .43) * .045);
+  if (WORLD.hallHalo) WORLD.hallHalo.material.opacity = (.30 + f * .14 + Math.sin(clock * .6) * .035) * TH.lamp;
+  if (WORLD.hallLight) WORLD.hallLight.intensity = 3.4 * (1 + f * .30) * (1 + Math.sin(clock * .43) * .045) * TH.lamp;
   /* the moon only breathes — the haze in front of it is what actually moves */
-  if (WORLD.moonHalo) WORLD.moonHalo.material.opacity = .44 + f * .10 + Math.sin(clock * .34) * .05;
+  if (WORLD.moonHalo) WORLD.moonHalo.material.opacity = (.44 + f * .10 + Math.sin(clock * .34) * .05) * TH.moon;
   /* These are LEDs now, not flames. The old term guttered by ±22% at two and
      a bit hertz, which on a strip light looks like a fault. What is left is
      the scroll response and a breath. */
   if (WORLD.lanternLights) WORLD.lanternLights.forEach((l, i) => {
-    l.intensity = 2.0 * (1 + f * .45) * (.98 + .02 * Math.sin(clock * .8 + i * 2.1) + .04 * pulse);
+    l.intensity = 2.0 * (1 + f * .45) * (.98 + .02 * Math.sin(clock * .8 + i * 2.1) + .04 * pulse) * TH.lamp;
   });
   if (WORLD.lanternGlows) WORLD.lanternGlows.forEach(g => { g.quaternion.copy(camera.quaternion); });
 
@@ -4851,7 +5120,7 @@ function updateWorld(dt) {
   if (WORLD.moonVeil) WORLD.moonVeil.forEach(v => {
     const d = v.userData;
     v.position.x = d.x0 + Math.sin(clock * d.sp + d.ph) * d.amp;
-    v.material.opacity = d.op * (.70 + .30 * Math.sin(clock * d.sp * 1.7 + d.ph));
+    v.material.opacity = d.op * (.70 + .30 * Math.sin(clock * d.sp * 1.7 + d.ph)) * TH.moon;
   });
 
   if (WORLD.haze) WORLD.haze.forEach(h => {
@@ -4983,6 +5252,7 @@ const JOBS = [
   ['Raising the mist', () => { buildAtmosphere(); buildLeafFall(); buildWisps(); }],
   ['Polishing the water', () => {
     initPost(); buildCards(); buildCardCloth();
+    applyTheme(themeName());
     WORLD.fg.forEach(m => m.layers.set(1));
     WORD.glyphs.forEach(m => m.layers.set(2));
     if (WORLD.rain) WORLD.rain.layers.set(1);
