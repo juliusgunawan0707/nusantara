@@ -8,9 +8,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305070a'/%3E%3Cpath d='M14.9 15.1 11.7 12.8 11.7 24.3 14.9 24.3z' fill='%23dfe7e0'/%3E%3Cpath d='M17.1 15.1 20.3 12.8 20.3 24.3 17.1 24.3z' fill='%23dfe7e0'/%3E%3Cpath d='M14.9 10.3 11.7 7.5 11.7 12.8 14.9 15.1z' fill='%23dfe7e0' fill-opacity='.38'/%3E%3Cpath d='M17.1 10.3 20.3 7.5 20.3 12.8 17.1 15.1z' fill='%23dfe7e0' fill-opacity='.38'/%3E%3Cpath d='M14.9 17.0 12.8 18.8 14.9 20.6' stroke='%23c99b3f' stroke-width='1.4' fill='none'/%3E%3Cpath d='M17.1 17.0 19.2 18.8 17.1 20.6' stroke='%23c99b3f' stroke-width='1.4' fill='none'/%3E%3Crect x='11.2' y='24.3' width='9.6' height='1.6' fill='%23dfe7e0'/%3E%3Crect x='8.6' y='27.0' width='14.8' height='1.7' fill='%23dfe7e0' fill-opacity='.62'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="secret-pathways-assets/fonts.css">
 <script>
-/* theme before first paint: night (default) or day, remembered per browser */
+/* theme before first paint: night (default) or dusk, remembered per browser */
 (function(){ var t = null; try { t = localStorage.getItem('nusa-theme'); } catch (e) {}
-  document.documentElement.setAttribute('data-theme', t === 'day' ? 'day' : 'night'); })();
+  document.documentElement.setAttribute('data-theme', t === 'dusk' ? 'dusk' : 'night'); })();
 </script>
 <style>
 /* ============================================================= tokens */
@@ -46,35 +46,18 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
-/* ============================================================= day (proposal)
-   The same page in daylight. Night stays exactly as it was: every rule here
-   is scoped to [data-theme="day"]. Text flips to dark ink with a pale halo,
-   the washes that darkened the frame (vignette, sticky nav, preloader) turn
-   to a pale haze. */
-[data-theme="day"]{
-  --ink:#dfe7e3; --ink-2:#d3ddd8;
-  --bone:#0e1c16; --bone-dim:#2c3c34; --muted:#4d5d55;
-  --line:rgba(14,28,22,.16); --line-soft:rgba(14,28,22,.08);
-}
-[data-theme="day"] #gl{ background:#b8cad3; }
-[data-theme="day"] #vignette{ background:radial-gradient(125% 95% at 50% 42%, transparent 55%, rgba(210,222,228,.35) 100%); }
-[data-theme="day"] #grain{ opacity:.035; }
-[data-theme="day"] #pre{ background:#dfe7e3; }
-[data-theme="day"] .pre-bar{ background:rgba(14,28,22,.14); }
-[data-theme="day"] .nav::before{ background:rgba(232,239,236,.72); }
-[data-theme="day"] .eyebrow,
-[data-theme="day"] .display,
-[data-theme="day"] .body,
-[data-theme="day"] .body-lg{ text-shadow:0 1px 18px rgba(240,246,244,.85); }
-[data-theme="day"] .body{ color:#2e3d36; }
-[data-theme="day"] .body-lg{ color:#22312a; }
-[data-theme="day"] svg [stroke="#dfe7e0"]{ stroke:var(--bone); }
-[data-theme="day"] svg [fill="#dfe7e0"]{ fill:var(--bone); }
+/* ============================================================= dusk
+   Julius chose dusk over full day (24 Sep 2026): the scene's textures were
+   painted dark for night, and the Istana and gallery plates are night renders
+   with lit windows - at golden hour those read as right, in daylight as
+   wrong. The frame stays dark enough for the night UI, so only the canvas
+   backdrop changes here; everything else is the THEME table in the scene. */
+[data-theme="dusk"] #gl{ background:#1d1a24; }
 .theme-sw{ width:30px; height:30px; display:inline-grid; place-items:center; color:var(--bone-dim); transition:color .3s; }
 .theme-sw:hover{ color:var(--bone); }
 .theme-sw svg{ width:15px; height:15px; }
 .theme-sw:focus-visible{ outline:1px solid var(--vermilion); outline-offset:3px; }
-[data-theme="night"] .theme-sw .i-sun, [data-theme="day"] .theme-sw .i-moon{ display:none; }
+[data-theme="night"] .theme-sw .i-sun, [data-theme="dusk"] .theme-sw .i-moon{ display:none; }
 
 /* ============================================================= layers */
 #gl{
@@ -1015,7 +998,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <div class="lang-sw" role="group" aria-label="Language" data-i18n-aria="langAria">
       <button type="button" data-lang="en" aria-pressed="true" data-cursor>EN</button><span aria-hidden="true">/</span><button type="button" data-lang="id" aria-pressed="false" data-cursor>ID</button>
     </div>
-    <button type="button" class="theme-sw" id="themeSw" aria-label="Switch between night and day" data-i18n-aria="themeAria" data-cursor>
+    <button type="button" class="theme-sw" id="themeSw" aria-label="Switch between night and dusk" data-i18n-aria="themeAria" data-cursor>
       <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
@@ -1366,7 +1349,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     footP: 'Empat babak di sepanjang Sumbu Kebangsaan, Nusantara, Kalimantan Timur, dirender langsung dengan Three.js. Ketiga plaza dirancang oleh URBAN+ untuk Kementerian Pekerjaan Umum; angka dan tanggal di sini bersumber dari Kementerian tersebut dan Kementerian Sekretariat Negara. Bangunan yang Anda lihat adalah rekonstruksi bergaya — membawa suasana tempatnya, bukan otoritasnya. Proyek pribadi, dan bukan pernyataan lembaga mana pun.',
     fActs: 'Babak', fHill: 'Di bukit', fElse: 'Tautan lain', fSource: 'Kode sumber', fUrban: 'Plaza URBAN+',
     fBase: 'WebGL · Onest · Kalimantan Timur',
-    langAria: 'Bahasa', themeAria: 'Ganti malam dan siang',
+    langAria: 'Bahasa', themeAria: 'Ganti malam dan senja',
     title: 'Nusantara — hutan hujan yang menjadi ibu kota',
     desc: 'Empat babak di sepanjang Sumbu Kebangsaan, sumbu kebangsaan Nusantara di Kalimantan Timur — Plaza Bhinneka Tunggal Ika, Taman Kusuma Bangsa, dan Plaza Seremoni.'
   };
@@ -1445,7 +1428,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 
   var sw = document.getElementById('themeSw');
   if (sw) sw.addEventListener('click', function () {
-    var next = document.documentElement.getAttribute('data-theme') === 'day' ? 'night' : 'day';
+    var next = document.documentElement.getAttribute('data-theme') === 'dusk' ? 'night' : 'dusk';
     if (window.NUSA_THEME) window.NUSA_THEME.set(next);
     else { document.documentElement.setAttribute('data-theme', next); try { localStorage.setItem('nusa-theme', next); } catch (e) {} }
   });
@@ -1942,21 +1925,29 @@ function texSky() {
   return c;
 }
 
-/* Daylight sky: the same canvas size and horizon glow position as the night
-   one, so the ridge and the fog meet it at the same line. No stars. */
-function texSkyDay() {
+/* Dusk sky: same canvas and the same horizon-glow position as the night one,
+   so the ridge and the fog meet it on the same line. Blue-violet overhead,
+   the sun gone just behind the ridge on the right, a few first stars. */
+function texSkyDusk() {
   const W = 512, H = 512, c = cvs(W, H), x = c.getContext('2d');
   const g = x.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0, 'rgb(92,142,194)');   g.addColorStop(.40, 'rgb(140,180,212)');
-  g.addColorStop(.72, 'rgb(186,207,220)'); g.addColorStop(.90, 'rgb(208,220,226)');
-  g.addColorStop(1, 'rgb(200,212,216)');
+  g.addColorStop(0, 'rgb(34,44,82)');    g.addColorStop(.34, 'rgb(86,78,116)');
+  g.addColorStop(.60, 'rgb(186,114,104)'); g.addColorStop(.80, 'rgb(240,158,92)');
+  g.addColorStop(1, 'rgb(206,120,78)');
   x.fillStyle = g; x.fillRect(0, 0, W, H);
-  x.globalAlpha = .42; x.globalCompositeOperation = 'screen';
+  x.globalAlpha = .30; x.globalCompositeOperation = 'overlay';
   x.drawImage(fbmCanvas(W, H, 313, 5, 3, .9), 0, 0);
   x.globalAlpha = 1; x.globalCompositeOperation = 'source-over';
-  const wg = x.createRadialGradient(W * .68, H * .95, 4, W * .68, H * .95, W * .44);
-  wg.addColorStop(0, 'rgba(255,236,206,.30)'); wg.addColorStop(1, 'rgba(255,255,255,0)');
+  const wg = x.createRadialGradient(W * .68, H * .95, 4, W * .68, H * .95, W * .50);
+  wg.addColorStop(0, 'rgba(255,214,150,.62)'); wg.addColorStop(.45, 'rgba(255,150,90,.22)');
+  wg.addColorStop(1, 'rgba(0,0,0,0)');
   x.fillStyle = wg; x.fillRect(0, 0, W, H);
+  const rnd = mulberry32(881);
+  for (let i = 0; i < 90; i++) {
+    const sx = rnd() * W, sy = rnd() * H * .30, r = .5 + rnd() * rnd() * 1.2;
+    x.fillStyle = 'rgba(230,236,245,' + (.08 + rnd() * .28) * (1 - sy / (H * .30)) + ')';
+    x.beginPath(); x.arc(sx, sy, r, 0, TAU); x.fill();
+  }
   return c;
 }
 
@@ -4358,9 +4349,10 @@ function buildLights() {
   const stairL = new THREE.PointLight(0xffa049, 4.2, 17, 2);
   stairL.position.set(0, 7.6, -26.0); scene.add(stairL); WORLD.stair = stairL;
 }
-/* ====================================================== 5b · night / day
+/* ====================================================== 5b · night / dusk
    One table holds every value that differs between the two. Night is the
-   page as it was art-directed; day is a first pass for review. Per-frame
+   page as it was art-directed; dusk is golden hour, chosen by Julius over
+   full day because every asset in the scene was made for the dark. Per-frame
    animation multiplies by TH.lamp / TH.moon, so a lamp switched off in the
    table stays off instead of being re-lit by the next frame. */
 const THEME = {
@@ -4370,11 +4362,11 @@ const THEME = {
     fill: [0x86c6d2, .95], stair: 4.2, wings: 2.2, moonL: 3.0, lamp: 1, moon: 1,
     istana: 0xc6d1d6, embers: true, post: { exp: .62, bloom: .34, vig: 1, sat: 1.05 }
   },
-  day: {
-    clear: 0xc4d6de, fog: 0xbfd0d6, fogD: .0098, bg: 0xc4d6de, sky: 'day', skyCol: [1.55, 1.55, 1.6],
-    hemi: [0xe2f1f8, 0x55623f, 1.6], key: [0xfff0d8, 3.6], rim: [0xffe0b8, .7],
-    fill: [0xd7ebf3, .7], stair: 0, wings: 0, moonL: 0, lamp: 0, moon: 0,
-    istana: 0xffffff, embers: false, post: { exp: 1.18, bloom: .10, vig: .25, sat: 1.04 }
+  dusk: {
+    clear: 0x1d1a24, fog: 0x3b2e35, fogD: .0150, bg: 0x1d1a24, sky: 'dusk', skyCol: [1.25, 1.18, 1.18],
+    hemi: [0xf2b58c, 0x14170f, .55], key: [0xffb27a, 1.85], rim: [0xff8a4a, 1.15],
+    fill: [0xc9a0a6, .6], stair: 2.8, wings: 1.4, moonL: 0, lamp: .6, moon: 0,
+    istana: 0xf2d8c6, embers: true, post: { exp: .76, bloom: .30, vig: .85, sat: 1.10 }
   }
 };
 const TH = { lamp: 1, moon: 1 };
@@ -4387,7 +4379,7 @@ function applyTheme(name) {
   scene.fog.color.setHex(t.fog); scene.fog.density = t.fogD;
   scene.background.setHex(t.bg);
   if (WORLD.sky) {
-    SKY_TEX[t.sky] = SKY_TEX[t.sky] || (t.sky === 'day' ? tx(texSkyDay()) : WORLD.sky.material.map);
+    SKY_TEX[t.sky] = SKY_TEX[t.sky] || (t.sky === 'dusk' ? tx(texSkyDusk()) : WORLD.sky.material.map);
     if (!SKY_TEX.night) SKY_TEX.night = WORLD.sky.material.map;
     WORLD.sky.material.map = SKY_TEX[t.sky];
     WORLD.sky.material.color.setRGB(t.skyCol[0], t.skyCol[1], t.skyCol[2]);
@@ -4410,7 +4402,7 @@ function applyTheme(name) {
     u.uExp.value = t.post.exp; u.uBloom.value = t.post.bloom; u.uVig.value = t.post.vig; u.uSat.value = t.post.sat;
   }
 }
-const themeName = () => document.documentElement.getAttribute('data-theme') === 'day' ? 'day' : 'night';
+const themeName = () => document.documentElement.getAttribute('data-theme') === 'dusk' ? 'dusk' : 'night';
 window.NUSA_THEME = {
   set(name) {
     document.documentElement.setAttribute('data-theme', name);
