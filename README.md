@@ -30,15 +30,15 @@ The four acts follow the axis from its southern end back up to the palace:
 ## Sources for the figures on the page
 
 - Land area 252,660 ha — Law 21/2023 (revising Law 3/2022)
-- Green cover 75% — statutory floor: 65% protected forest + 10% food estate
+- Green cover 75% — forest-city target: 65% protected area + 10% food production
+  (explanatory note to Article 2(a) of Law 3/2022; annex to Perpres 63/2022)
 - Sumbu Kebangsaan **stage one** (Plaza Seremoni): built Dec 2022 – Dec 2023,
   Rp381.7 billion, contract Rp365.8 billion to PT Brantas Abipraya, inaugurated
   14 August 2024 — [pu.go.id](https://pu.go.id/berita/kementerian-pupr-targetkan-penataan-sumbu-kebangsaan-ikn-tahap-i-rampung-desember-2023),
   [setneg.go.id](https://setneg.go.id/baca/index/presiden_jokowi_resmikan_plaza_seremoni_sumbu_kebangsaan_di_ibu_kota_nusantara).
-  That figure covers stage one only — Plaza Bhinneka was a separate Rp680
-  billion running to December 2024.
-- Taman Kusuma Bangsa: 1,915 m², opened 12 August 2024, 17 m garuda wings,
-  79 m flag monument (a MURI record as the country's tallest) — [pu.go.id](https://pu.go.id/berita/simbol-penghormatan-bagi-para-pahlawan-bangsa-taman-kusuma-bangsa-di-ikn-diresmikan)
+  That figure covers stage one (Plaza Seremoni) only.
+- Taman Kusuma Bangsa: 1,915 m², opened 12 August 2024, the Sayap Pelindung
+  Nusantara garuda-wing element, 79 m flag monument (a MURI record as the country's tallest) — [pu.go.id](https://pu.go.id/berita/simbol-penghormatan-bagi-para-pahlawan-bangsa-taman-kusuma-bangsa-di-ikn-diresmikan)
 - The three plazas were designed by [URBAN+](https://www.urbanplus.co.id/projects/)
   for the Ministry of Public Works
 
