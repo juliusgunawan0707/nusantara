@@ -1,0 +1,421 @@
+{
+  "meta": {
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "totalFrames": 1080,
+    "beatsLocked": true,
+    "version": 2,
+    "note": "Nilai awal 20 Okt 2026. Teks overlay = DRAF (humanizer di audio_copy.md). 2a TIDAK menyebut/membandingkan versi diorama. Teks halaman sendiri ikut terekam di capture ber-ui:true. Teks overlay diperbarui dari humanizer (audio_copy.md 2a) 20 Okt. v2: batas shot dikunci ke beats.json 2a (nadi 16th, ±70 BPM; downbeat tak terukur). CodeCard S04 dimajukan ke f38 agar sejajar naik lagu 29,0 dtk."
+  },
+  "shots": [
+    {
+      "id": "S01_hook",
+      "title": "Hook",
+      "from": 0,
+      "to": 118,
+      "captures": [
+        "S01_hook"
+      ],
+      "overlays": [
+        {
+          "component": "Caption",
+          "from": 70,
+          "to": 116,
+          "props": {
+            "lines": [
+              "Indonesia is building",
+              "a new capital."
+            ],
+            "accent": [
+              1
+            ],
+            "side": "bottom"
+          }
+        }
+      ],
+      "transitionIn": null
+    },
+    {
+      "id": "S02_walk",
+      "title": "Four acts",
+      "from": 118,
+      "to": 723,
+      "captures": [
+        "S02_walk"
+      ],
+      "overlays": [
+        {
+          "component": "ActTag",
+          "from": 0,
+          "to": 605,
+          "props": {
+            "source": "events.act",
+            "labels": [
+              "The Nationhood Axis",
+              "Plaza Bhinneka",
+              "Kusuma Bangsa Park",
+              "Ceremonial Plaza"
+            ]
+          }
+        },
+        {
+          "component": "Caption",
+          "from": 8,
+          "to": 110,
+          "props": {
+            "eyebrow": "One scroll, four acts",
+            "lines": [
+              "Rendered live",
+              "in the browser."
+            ],
+            "accent": [
+              1
+            ]
+          }
+        }
+      ],
+      "transitionIn": null
+    },
+    {
+      "id": "S03_scale",
+      "title": "Scale",
+      "from": 723,
+      "to": 839,
+      "captures": [
+        "S03_scale"
+      ],
+      "overlays": [
+        {
+          "component": "StatLine",
+          "from": 6,
+          "to": 112,
+          "props": {
+            "eyebrow": "The scale",
+            "value": "252,660 ha",
+            "line": "about 3.4 times Singapore",
+            "note": "Law 21/2023 and SingStat"
+          }
+        }
+      ],
+      "transitionIn": null
+    },
+    {
+      "id": "S04_bug",
+      "title": "Silent bug",
+      "from": 839,
+      "to": 980,
+      "captures": [
+        "S04_bug"
+      ],
+      "overlays": [
+        {
+          "component": "Caption",
+          "from": 6,
+          "to": 70,
+          "props": {
+            "eyebrow": "The silent bug",
+            "lines": [
+              "No error, yet",
+              "fully invisible."
+            ],
+            "accent": [
+              1
+            ]
+          }
+        },
+        {
+          "component": "CodeCard",
+          "from": 38,
+          "to": 137,
+          "props": {
+            "lines": [
+              "new THREE.CanvasTexture(img)   // no error, transparent",
+              "ctx.drawImage(img, 0, 0); new THREE.CanvasTexture(canvas)"
+            ]
+          }
+        }
+      ],
+      "transitionIn": null
+    },
+    {
+      "id": "S05_end",
+      "title": "End card",
+      "from": 980,
+      "to": 1080,
+      "captures": [
+        "S05_end"
+      ],
+      "overlays": [
+        {
+          "component": "EndCard",
+          "from": 4,
+          "to": 100,
+          "props": {
+            "title": "Walk it",
+            "accentWord": "yourself",
+            "url": "nusantara-alpha.vercel.app",
+            "hint": "Best on a laptop.",
+            "disclaimer": "Personal project, not an official statement. Buildings are stylised."
+          }
+        }
+      ],
+      "transitionIn": null
+    }
+  ],
+  "captures": {
+    "S01_hook": {
+      "shot": "S01_hook",
+      "outFrames": 120,
+      "handle": 0,
+      "sim": {
+        "dtSec": 0.0333333,
+        "theme": "dusk",
+        "ui": true,
+        "intro": true
+      },
+      "scroll": {
+        "keys": [
+          {
+            "f": 0,
+            "prog": 0
+          }
+        ]
+      },
+      "camera": {
+        "mode": "page"
+      },
+      "rules": [
+        "intro wordmark NUSA milik halaman diputar dari awal",
+        "preloader TIDAK terlihat"
+      ]
+    },
+    "S02_walk": {
+      "shot": "S02_walk",
+      "outFrames": 600,
+      "handle": 30,
+      "sim": {
+        "dtSec": 0.0333333,
+        "theme": "dusk",
+        "ui": true
+      },
+      "scroll": {
+        "ease": "inOutSine",
+        "keys": [
+          {
+            "f": 0,
+            "prog": 0
+          },
+          {
+            "f": 90,
+            "prog": 1
+          },
+          {
+            "f": 210,
+            "prog": 1
+          },
+          {
+            "f": 270,
+            "prog": 2
+          },
+          {
+            "f": 360,
+            "prog": 2
+          },
+          {
+            "f": 420,
+            "prog": 3
+          },
+          {
+            "f": 510,
+            "prog": 3
+          },
+          {
+            "f": 570,
+            "prog": 4
+          },
+          {
+            "f": 600,
+            "prog": 4
+          }
+        ]
+      },
+      "camera": {
+        "mode": "page"
+      },
+      "rules": [
+        "teks halaman terbaca saat jeda di tiap babak",
+        "cek kata terlarang per 15 frame pada teks DOM yang terlihat"
+      ],
+      "useHandleTail": 5
+    },
+    "S03_scale": {
+      "shot": "S03_scale",
+      "outFrames": 120,
+      "handle": 30,
+      "sim": {
+        "dtSec": 0.0333333,
+        "theme": "dusk",
+        "ui": false,
+        "hideWord": true
+      },
+      "scroll": {
+        "keys": [
+          {
+            "f": 0,
+            "prog": 0
+          }
+        ]
+      },
+      "camera": {
+        "ease": "inOutSine",
+        "keys": [
+          {
+            "f": 0,
+            "pos": [
+              0.0,
+              1.6,
+              2.6
+            ],
+            "look": [
+              0,
+              7.0,
+              -22
+            ],
+            "fov": 46
+          },
+          {
+            "f": 120,
+            "pos": [
+              0.0,
+              1.8,
+              0.6
+            ],
+            "look": [
+              0,
+              7.2,
+              -22
+            ],
+            "fov": 44
+          }
+        ]
+      },
+      "rules": [
+        "kamera tangan = axis-low carousel 2a, didorong pelan"
+      ]
+    },
+    "S04_bug": {
+      "shot": "S04_bug",
+      "outFrames": 140,
+      "handle": 30,
+      "sim": {
+        "dtSec": 0.0333333,
+        "theme": "dusk",
+        "ui": false,
+        "hideWord": true
+      },
+      "scroll": {
+        "keys": [
+          {
+            "f": 0,
+            "prog": 0
+          }
+        ]
+      },
+      "camera": {
+        "ease": "inOutSine",
+        "keys": [
+          {
+            "f": 0,
+            "pos": [
+              1.6,
+              2.4,
+              -1.4
+            ],
+            "look": [
+              0,
+              4.8,
+              -8.6
+            ],
+            "fov": 38
+          },
+          {
+            "f": 140,
+            "pos": [
+              0.2,
+              2.9,
+              -2.6
+            ],
+            "look": [
+              0,
+              5.0,
+              -8.6
+            ],
+            "fov": 36
+          }
+        ]
+      },
+      "rules": [
+        "kamera tangan = tugu-close carousel 2a, orbit kecil",
+        "senja (malam menggantung headless)"
+      ],
+      "useHandleTail": 1
+    },
+    "S05_end": {
+      "shot": "S05_end",
+      "outFrames": 100,
+      "handle": 30,
+      "sim": {
+        "dtSec": 0.0333333,
+        "theme": "dusk",
+        "ui": false,
+        "hideWord": true
+      },
+      "scroll": {
+        "keys": [
+          {
+            "f": 0,
+            "prog": 0
+          }
+        ]
+      },
+      "camera": {
+        "ease": "outCubic",
+        "keys": [
+          {
+            "f": 0,
+            "pos": [
+              -3.6,
+              3.2,
+              -4.6
+            ],
+            "look": [
+              1.0,
+              7.5,
+              -26
+            ],
+            "fov": 50
+          },
+          {
+            "f": 100,
+            "pos": [
+              -3.0,
+              3.0,
+              -6.0
+            ],
+            "look": [
+              1.0,
+              7.5,
+              -26
+            ],
+            "fov": 50
+          }
+        ]
+      },
+      "rules": [
+        "kamera tangan = ridge carousel 2a",
+        "ruang sepertiga bawah untuk teks"
+      ]
+    }
+  }
+}

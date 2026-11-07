@@ -1,0 +1,72 @@
+[
+  {
+    "id": "S01_hook",
+    "frames": 120,
+    "secs": 13.2,
+    "fps": 9.1,
+    "darkShareMax": null,
+    "textFail": 0,
+    "textCheck": 0,
+    "eventTypes": [
+      "act"
+    ],
+    "mp4": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\clips\\S01_hook\\S01_hook.mp4",
+    "contact": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\contact\\S01_hook.png"
+  },
+  {
+    "id": "S02_walk",
+    "frames": 660,
+    "secs": 64.9,
+    "fps": 10.16,
+    "darkShareMax": null,
+    "textFail": 0,
+    "textCheck": 17,
+    "eventTypes": [
+      "act"
+    ],
+    "mp4": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\clips\\S02_walk\\S02_walk.mp4",
+    "contact": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\contact\\S02_walk.png"
+  },
+  {
+    "id": "S03_scale",
+    "frames": 180,
+    "secs": 16.4,
+    "fps": 11,
+    "darkShareMax": 0.055,
+    "textFail": 0,
+    "textCheck": 0,
+    "eventTypes": [
+      "act"
+    ],
+    "mp4": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\clips\\S03_scale\\S03_scale.mp4",
+    "contact": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\contact\\S03_scale.png"
+  },
+  {
+    "id": "S04_bug",
+    "frames": 200,
+    "secs": 16.3,
+    "fps": 12.27,
+    "darkShareMax": 0.024,
+    "textFail": 0,
+    "textCheck": 0,
+    "eventTypes": [
+      "act"
+    ],
+    "mp4": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\clips\\S04_bug\\S04_bug.mp4",
+    "contact": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\contact\\S04_bug.png"
+  },
+  {
+    "id": "S05_end",
+    "frames": 160,
+    "secs": 14.3,
+    "fps": 11.2,
+    "darkShareMax": 0.065,
+    "textFail": 0,
+    "textCheck": 0,
+    "eventTypes": [
+      "act"
+    ],
+    "mp4": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\clips\\S05_end\\S05_end.mp4",
+    "contact": "C:\\Users\\juliu\\OneDrive\\Claude\\Claude Code\\nusantara-landing\\video\\contact\\S05_end.png"
+  }
+]
